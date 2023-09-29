@@ -1,9 +1,6 @@
 import React, {useState, useEffect}  from 'react';
 import {SERVER_URL} from '../constants';
-
-
-//  required properties -  assignmentId
-//  
+import {Link} from 'react-router-dom';
 
 function GradeAssignment ( ) {
   
@@ -11,7 +8,7 @@ function GradeAssignment ( ) {
   let assignmentId=0;
   const [message, setMessage] = useState('');
 
-  const path = window.location.pathname;  // /gradebook/123
+  const path = window.location.pathname; 
   const s = /\d+$/.exec(path)[0];
   console.log("Grade assignmentId="+s);
   assignmentId=s;
@@ -32,9 +29,7 @@ function GradeAssignment ( ) {
         console.error("fetch grades error "+ err);
       });
     }
-  
-    // when submit button pressed, send updated grades to back end 
-    //  and then fetch the new grades.
+
     const saveGrades = ( ) => {
       setMessage(''); 
       console.log("Gradebook.save ");     
@@ -61,8 +56,7 @@ function GradeAssignment ( ) {
 
     const onChangeInput = (e, row_id) => {
       setMessage('');
-      console.log("onChangeInput "+row_id);
-      // grade value must be digts only. 
+      console.log("onChangeInput "+row_id); 
       if ( /^\d*$/.test(e.target.value) ) {
         const editData = grades.map((row, idx) =>
           row_id === idx ? { ...row, grade: e.target.value } : row
